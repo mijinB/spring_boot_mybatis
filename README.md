@@ -6,6 +6,6 @@
 
 Spring Boot ⇒ 3.3.5<br>
 JDK ⇒ Amazon Corretto 21<br>
-Thymeleaf<br>
 MySQL ⇒ Community Server 8.0<br>
+Thymeleaf<br>
 MyBatis Framework
