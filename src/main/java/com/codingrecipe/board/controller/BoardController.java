@@ -23,6 +23,7 @@ public class BoardController {
     public String save(BoardDTO boardDTO) {
 //  public String save(@ModelAttribute BoardDTO boardDTO) {       @ModelAttribute 은 생략 가능해서 생략한 것
         System.out.println("boardDTO = " + boardDTO);
+        boardService.save(boardDTO);
         return "index";
     }
 }

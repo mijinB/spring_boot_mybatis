@@ -3,5 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board">
-
+    <!-- parameterType 의 board : resource > mybatis-config.xml 에서 typeAlias 로 설정한 것. (=여기서는 BoardDTO) -->
+    <!-- 화면(html)에서 사용하는 name 값, DB 에서 사용하는 Column 이름, DTO 에서 사용하는 Field 이름은 모두 일치 시키는 게 가장 좋다. -->
+    <insert id="save" parameterType="board">
+        insert into board_table(boardTitle, boardWriter, boardPass, boardContents)
+            values(#{boardTitle}, #{boardWriter}, #{boardPass}, #{boardContents})
+    </insert>
 </mapper>
