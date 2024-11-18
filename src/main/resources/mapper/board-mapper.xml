@@ -9,4 +9,10 @@
         insert into board_table(boardTitle, boardWriter, boardPass, boardContents)
             values(#{boardTitle}, #{boardWriter}, #{boardPass}, #{boardContents})
     </insert>
+    <select id="findAll" resultType="board">
+        <!-- select 를 실행하는 경우, resultType 은 무조건 있어야하고, parameterType 은 필요하면 있고 없을 수도 있다.
+         작성일자 format 을 위해 * 대신 아래처럼 작성 -->
+        select id, boardTitle, boardWriter, boardHits, date_format(createdAt, "%Y-%m-%d") as createdAt
+        from board_table order by id desc
+    </select>
 </mapper>

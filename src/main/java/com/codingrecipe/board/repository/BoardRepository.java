@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class BoardRepository {
@@ -18,5 +20,9 @@ public class BoardRepository {
          * boardDTO : query 로 보낼 data 가 있으면 보내는 것. 하나만 적을 수 있다. 두개 이상을 보내야 한다면 HashMap 같은 걸 정의해서 넘긴다면 가능하다.
          */
         sql.insert("Board.save", boardDTO);
+    }
+
+    public List<BoardDTO> findAll() {
+        return sql.selectList("Board.findAll");
     }
 }
