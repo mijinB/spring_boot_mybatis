@@ -27,7 +27,7 @@ public class BoardController {
 //  public String save(@ModelAttribute BoardDTO boardDTO) {       @ModelAttribute 은 생략 가능해서 생략한 것
         System.out.println("boardDTO = " + boardDTO);
         boardService.save(boardDTO);
-        return "index";
+        return "redirect:/list";            // 화면을 띄우는 게 아니고, @GetMapping("/list")를 다시 요청하는 것.
     }
 
     @GetMapping("/list")
@@ -51,6 +51,21 @@ public class BoardController {
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("board", boardDTO);
         System.out.println("boardDTO = " + boardDTO);
+        return "detail";
+    }
+
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable("id") Long id, Model model) {
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        return "update";
+    }
+
+    @PostMapping("/update/{id}")
+    public String update(BoardDTO boardDTO, Model model) {
+        boardService.update(boardDTO);
+        BoardDTO dto = boardService.findById(boardDTO.getId());
+        model.addAttribute("board", dto);
         return "detail";
     }
 }
