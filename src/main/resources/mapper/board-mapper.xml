@@ -5,7 +5,9 @@
 <mapper namespace="Board">
     <!-- parameterType 의 board : resource > mybatis-config.xml 에서 typeAlias 로 설정한 것. (=여기서는 BoardDTO) -->
     <!-- 화면(html)에서 사용하는 name 값, DB 에서 사용하는 Column 이름, DTO 에서 사용하는 Field 이름은 모두 일치 시키는 게 가장 좋다. -->
-    <insert id="save" parameterType="board">
+    <!-- useGeneratedKeys="true" keyProperty="id" : insert 수행 후 id 값이 포함된 DTO 를 return 받기 위해 추가
+         (BoardRepository 의 save 에서 원래는 id 가 null 이였지만, 추가함으로써 id 가 포함된 DTO 객체가 만들어지고 그것을 BoardService 에서 잘 활용을 할 수 있게 되는 것이다.) -->
+    <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
         insert into board_table(boardTitle, boardWriter, boardPass, boardContents)
             values(#{boardTitle}, #{boardWriter}, #{boardPass}, #{boardContents})
     </insert>
@@ -29,4 +31,8 @@
     <delete id="delete" parameterType="Long">
         delete from board_table where id=#{id}
     </delete>
+    <insert id="saveFile" parameterType="boardFile">
+        insert into board_file_table(originalFileName, storedFileName, boardId)
+        values (#{originalFileName}, #{storedFileName}, #{boardId})
+    </insert>
 </mapper>

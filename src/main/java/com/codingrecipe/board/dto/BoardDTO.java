@@ -3,6 +3,7 @@ package com.codingrecipe.board.dto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -21,4 +22,6 @@ public class BoardDTO {
     private String boardContents;
     private int boardHits;
     private String createdAt;
+    private int fileAttached;           // 파일의 유(1) 무(0)
+    private MultipartFile boardFile;    // 파일 자체를 담기위함
 }
