@@ -8,8 +8,8 @@
     <!-- useGeneratedKeys="true" keyProperty="id" : insert 수행 후 id 값이 포함된 DTO 를 return 받기 위해 추가
          (BoardRepository 의 save 에서 원래는 id 가 null 이였지만, 추가함으로써 id 가 포함된 DTO 객체가 만들어지고 그것을 BoardService 에서 잘 활용을 할 수 있게 되는 것이다.) -->
     <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
-        insert into board_table(boardTitle, boardWriter, boardPass, boardContents)
-            values(#{boardTitle}, #{boardWriter}, #{boardPass}, #{boardContents})
+        insert into board_table(boardTitle, boardWriter, boardPass, boardContents, fileAttached)
+            values(#{boardTitle}, #{boardWriter}, #{boardPass}, #{boardContents}, #{fileAttached})
     </insert>
     <select id="findAll" resultType="board">
         <!-- select 를 실행하는 경우, resultType 은 무조건 있어야하고, parameterType 은 필요하면 있고 없을 수도 있다.
@@ -22,7 +22,7 @@
     </update>
     <select id="findById" parameterType="Long" resultType="board">
         select id, boardTitle, boardWriter, boardPass, boardContents, boardHits
-        , date_format(createdAt, "%Y-%m-%d %H:%i:%s") as createdAt
+        , date_format(createdAt, "%Y-%m-%d %H:%i:%s") as createdAt, fileAttached
         from board_table where id=#{id}
     </select>
     <update id="update">
@@ -35,4 +35,7 @@
         insert into board_file_table(originalFileName, storedFileName, boardId)
         values (#{originalFileName}, #{storedFileName}, #{boardId})
     </insert>
+    <select id="findFile" parameterType="Long" resultType="boardFile">
+        select * from board_file_table where boardId=#{id}
+    </select>
 </mapper>
