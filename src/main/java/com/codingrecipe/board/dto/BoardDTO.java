@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -23,5 +25,5 @@ public class BoardDTO {
     private int boardHits;
     private String createdAt;
     private int fileAttached;           // 파일의 유(1) 무(0)
-    private MultipartFile boardFile;    // 파일 자체를 담기위함
+    private List<MultipartFile> boardFile;    // 파일 자체를 담기위함
 }
